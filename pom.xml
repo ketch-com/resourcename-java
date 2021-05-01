@@ -29,11 +29,6 @@
       <releases><enabled>true</enabled></releases>
       <snapshots><enabled>true</enabled></snapshots>
     </repository>
-    <repository>
-      <id>github-moonraker</id>
-      <name>Moonraker Maven Repo</name>
-      <url>https://maven.pkg.github.com/deklareddotcom/moonraker</url>
-    </repository>
   </repositories>
 
   <build>
