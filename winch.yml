@@ -1,0 +1,9 @@
+name: resourcename-java
+description: Ketch Resource Name
+repository: https://github.com/ketch-com/resourcename-java
+language: java
+version:
+  enabled: true
+release:
+  branches:
+    only: main
