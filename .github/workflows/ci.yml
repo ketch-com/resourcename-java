@@ -38,5 +38,5 @@ jobs:
         run: mvn -B package --file pom.xml -s settings.xml
 
       - name: Publish to GitHub Packages
-        if: github.ref == 'refs/heads/master'
+        if: github.ref == 'refs/heads/main'
         run: mvn deploy -s settings.xml
