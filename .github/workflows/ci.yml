@@ -11,8 +11,7 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      GITHUB_ACTOR: ${{ github.actor }}
+      GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
     steps:
       - uses: actions/checkout@v2.3.4
       - uses: actions/cache@v2.1.5
@@ -25,6 +24,6 @@ jobs:
           grep -rl "__PUBLISHER__" settings.xml | xargs sed -i s@"__PUBLISHER__"@"$PUBLISHER"@g
           grep -rl "__TOKEN__" settings.xml | xargs sed -i s@"__TOKEN__"@"$TOKEN"@g
         env:
-          PUBLISHER: ${{ env.GITHUB_ACTOR }}
+          PUBLISHER: ketch-com
           TOKEN: ${{ env.GITHUB_TOKEN }}
       - uses: winchci/actions-java@v16
