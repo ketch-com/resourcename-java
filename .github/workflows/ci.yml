@@ -1,0 +1,30 @@
+name: Build
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GITHUB_ACTOR: ${{ github.actor }}
+    steps:
+      - uses: actions/checkout@v2.3.4
+      - uses: actions/cache@v2.1.5
+        with:
+          path: ~/.m2
+          key: v1-mvn-dep-${{ hashFiles('pom.xml') }}
+          restore-keys: v1-mvn-dep-
+      - name: Replace Macros
+        run: |
+          grep -rl "__PUBLISHER__" settings.xml | xargs sed -i s@"__PUBLISHER__"@"$PUBLISHER"@g
+          grep -rl "__TOKEN__" settings.xml | xargs sed -i s@"__TOKEN__"@"$TOKEN"@g
+        env:
+          PUBLISHER: ${{ env.GITHUB_ACTOR }}
+          TOKEN: ${{ env.GITHUB_TOKEN }}
+      - uses: winchci/actions-java@v16
